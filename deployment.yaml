@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8sminiapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8sminiapp
+  template:
+    metadata:
+      labels:
+        app: k8sminiapp
+    spec:
+      containers:
+      - name: k8sminiapp
+        image: k8sminiapp:dev
+        ports:
+        - containerPort: 8080

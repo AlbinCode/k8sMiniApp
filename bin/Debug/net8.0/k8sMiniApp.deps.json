@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "k8sMiniApp/1.0.0": {
+        "runtime": {
+          "k8sMiniApp.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "k8sMiniApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
