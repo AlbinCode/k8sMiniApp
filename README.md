@@ -1,62 +1,28 @@
-# 🐍 k8sMiniApp – Snake Game
+# k8sMiniApp
 
-Detta projekt är en **miniwebbapplikation** byggd i **ASP.NET Core 8** som körs i en **Docker-container**.  
-Applikationen innehåller ett klassiskt **Snake-spel** utvecklat i **JavaScript, HTML och CSS**.  
-Projektet är även **förberett för Kubernetes (k8s)** med `deployment.yaml` och `service.yaml`.
+A small web app packaged the way production services are: an **ASP.NET Core 8** app in a multi-stage **Docker** image, deployed to **Kubernetes** with a Deployment and a LoadBalancer Service. The app itself is a browser Snake game in HTML, CSS and JavaScript, served as static files.
 
----
+![.NET 8](https://img.shields.io/badge/.NET-8-512BD4) ![Docker](https://img.shields.io/badge/Docker-multi--stage-2496ED) ![Kubernetes](https://img.shields.io/badge/Kubernetes-Deployment%20%2B%20Service-326CE5)
 
-## 🚀 Funktioner
+## What it shows
 
-- Klassiskt Snake-spel med poängräkning  
-- Starta om-knapp ("Starta om")  
-- Styrning med piltangenter eller WASD  
-- Körs via ASP.NET statisk fil-hosting  
-- Färdig att byggas och köras i Docker  
-- Förberedd för Kubernetes-deployment  
+- Multi-stage Dockerfile: build with the .NET SDK image, run on the smaller ASP.NET runtime image
+- Kubernetes manifests (`deployment.yaml`, `service.yaml`) that expose the app on port 8080
+- Static file hosting in ASP.NET Core
+- The game: score counter, restart button, arrow keys or WASD
 
----
+## Run with Docker
 
-## 🧱 Projektstruktur
-
-```
-k8sMiniApp/
-│
-├── wwwroot/                  # Frontend-filer (HTML, CSS, JS)
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
-│
-├── Dockerfile                # Docker-instruktioner
-├── deployment.yaml           # Kubernetes Deployment
-├── service.yaml              # Kubernetes Service
-├── Program.cs                # ASP.NET startfil
-├── k8sMiniApp.csproj         # Projektfil
-└── appsettings.json          # Konfiguration
-```
-
----
-
-## 🐳 Docker-kommandon
-
-### 1️⃣ Bygg containern
 ```bash
 docker build -t k8sminiapp:dev .
-```
-
-### 2️⃣ Kör containern
-```bash
 docker run --rm -p 8080:8080 k8sminiapp:dev
 ```
 
-### 3️⃣ Öppna webbläsaren
-Gå till 👉 **http://localhost:8080**
+Open http://localhost:8080.
 
----
+## Run on Kubernetes
 
-## ☸️ Kubernetes (valfritt)
-
-Om du vill köra appen i Kubernetes (t.ex. via Docker Desktop):
+For example with Docker Desktop's built-in cluster:
 
 ```bash
 kubectl apply -f deployment.yaml
@@ -65,28 +31,18 @@ kubectl get pods
 kubectl get services
 ```
 
-När `k8sminiapp-service` körs kan du öppna den via `localhost:8080` eller dess `EXTERNAL-IP`.
+When `k8sminiapp-service` is running, open it on `localhost:8080` or its `EXTERNAL-IP`.
 
----
+## Project structure
 
-## 🧩 Tekniker
+```
+wwwroot/            Game frontend (index.html, style.css, script.js)
+Program.cs          ASP.NET Core host
+Dockerfile          Multi-stage image build
+deployment.yaml     Kubernetes Deployment
+service.yaml        Kubernetes Service (LoadBalancer)
+```
 
-- **C# / ASP.NET Core 8**
-- **HTML5 / CSS3 / JavaScript**
-- **Docker**
-- **Kubernetes**
-- **Visual Studio 2022**
+## Tech stack
 
----
-
-## 👨‍💻 Utvecklare
-
-**Albin Stenhoff**  
-🎓 *Inlämningsuppgift: Kubernetes / Docker Deployment*  
-📅 2025
-
----
-
-## 📜 Licens
-
-Detta projekt är fritt att använda i utbildningssyfte.
+C# · ASP.NET Core 8 · HTML, CSS, JavaScript · Docker · Kubernetes
